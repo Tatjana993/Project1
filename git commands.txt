@@ -7,5 +7,5 @@ git checkout -b "ime grane" - da napravi novu granu
 git checkout "ime grane" - da switch-am izmedju grana
 
 git status
-git pull - povuci yadnju veryiju sa gita
+git pull - povuci zadnju verziju sa gita
 git stash - ponistiti sve moje lokalne izmjene
