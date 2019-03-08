@@ -1,0 +1,3 @@
+- trebam napraviti odvojene module za pristum bazi 
+- poocu node.js pravim samo serversku stranu (rest full servise)
+- komanda nodemon za automatsko restartovanje servera nakon sto nesto izmjenim
