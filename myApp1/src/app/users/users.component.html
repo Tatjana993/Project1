@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Users</title>
+</head>
+
+<body>
+  <div>
+    <header class="header-users">
+      <div class="div-header-left">a</div>
+      <div class="div-header-center">b</div>
+      <div class="div-header-right">
+        <div class="div-registration">
+          <button mat-button [matMenuTriggerFor]="menu" class="button-menu"><div *ngIf="currentUser">{{currentUser}}</div></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+        </div>
+        <div class="div-login">
+          <a mat-raised-button routerLink="login" class="button-link" (click)="logout()">Log out</a>
+        </div>
+      </div>
+    </header>
+   
+  <br>
+  <br>
+ <!-- <ul [@listStagger]="users">
+    <li *ngFor="let user of users">
+        <a routerLink="/users_details/{{user.iduser}}">{{ user.username }}</a>
+      <ul>
+        <li>{{user.first_name}}</li>
+        <li>{{user.last_name}}</li>
+        <li><button class="btn btn-danger" (click)="deleteUser(user)"> Delete User</button></li>
+      </ul>
+    </li>
+  </ul>  -->
+</div>
+</body>
+
+</html>

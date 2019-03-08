@@ -1,0 +1,88 @@
+li {
+    color: white;
+}
+
+
+.col-lg-3 col-md-4 col-sm-6 portfolio-item {
+    display: inline-block;
+  
+}
+
+.nav-link {
+    cursor: pointer;
+    color:  #007bff;
+    font-size: 1rem
+}
+
+.div-center {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    margin-top: 20px;
+    overflow: hidden;
+ }
+
+ .div-listOfOffers {
+    width: 70%;
+    float: left;
+    left: 20px;
+    min-width: 70%;
+    background-color: white;
+ }
+
+ .div-offer {
+    float: left;
+    width: 70%;
+ }
+
+ .div-order {
+    width: 30%;
+    float: left;
+   /* left: 20px; */
+    min-width: 30%;
+    background-color: white;
+    height: fit-content;
+ }
+
+ .div-toOrder {
+   /* float: left;
+     width: 30%;
+     height: 100px;
+     left: 600px;
+     top: 30px; */
+     position: fixed;
+     right: 15px;
+     width: 22%;
+     
+     background-color: white;
+     border: 2px;
+     border-style: solid;
+     border-color: rgb(255, 90, 95);
+     padding: 5px;
+     height: fit-content;
+
+ }
+
+ body {
+    padding-top: 14px;
+   /* background-image: url(pic1.jpg); */
+  }
+
+  .offer-h400 {
+      float: left;
+      height: 400px;
+      margin-right: 20px;
+      margin-left: 20px;
+      margin-bottom: 10px;
+  }
+
+  .offer-w220 {
+      width: 220px;
+    /*  left: 150px;  */
+      margin-right: 20px;
+      margin-bottom: 10px;
+  }
+
+
+

@@ -1,0 +1,52 @@
+<div class="div-formtoorder">
+    <div class="success" *ngIf="showSucessMessage">
+        Order completed
+    </div>
+    <div class="success" *ngIf="tokenInvalid">
+        Token is invalid
+    </div>
+<h3><b>Shoping basket</b></h3>
+      <div *ngIf="orderList.lastIndexOf !== -1; else noOrderList">
+          
+        <ul>
+          <li *ngFor="let offer of selectedOffersList">
+            <ul>
+              <li>{{offer.amount}} x {{getName(offer.idoffer)}}</li>
+              <li>Price {{getOfferPrice(offer.idoffer)}} KM</li>
+              <li></li>
+              <li><button class="btn btn-danger" id="btn-remove" (click)="editSelectedOffer(offer)"><img class="img-icon" src="./../../assets/remove.svg"></button> &nbsp;&nbsp;  
+              <button class="btn btn-danger" id="btn-add" (click)="addSelectedOffer(offer)"><img class="img-icon" src="./../../assets/add.svg"></button></li>
+              </ul>
+          </li>
+        </ul> 
+      </div>
+      
+
+      <div>
+        <label><b>Total:&nbsp;</b></label>
+        <label>{{getTotalPrice()}} KM</label>
+      </div>
+      <div>
+      <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)"  *ngIf="selectedOffersList.length > 0; else noOrderList">
+    
+        <div class="form-group">
+         
+          <mat-form-field>
+          <input matInput type="text" #address="ngModel" [(ngModel)]="order.address"  placeholder="Address" name="address" class="form-control" id="address"
+          required [ngClass]="{'invalid-textbox' :f.submitted && !address.valid}">
+        </mat-form-field>
+        </div>
+        
+        <div class="example-button-row">
+          <button class="btn btn-primary" mat-raised-button type="submit">Order Now</button>
+        </div>
+        
+      </form>
+    </div>
+      <ng-template #noOrderList>
+          <div>
+            List is Empty...
+          </div>
+        </ng-template>
+
+</div>      

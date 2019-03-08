@@ -1,0 +1,137 @@
+.div-header {
+    width: 100%;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    background: black;
+    overflow: hidden;
+ }
+ .div-header-left {
+     width: 33%;
+     float: left;
+     left: 20px;
+     min-width: 30%;
+     background-color: white;
+ }
+ .div-header-center {
+     width: 33%;
+     float: left;
+    /* left: 10px; */
+     min-width: 30%;
+     background-color: white;
+ }
+ 
+ .div-header-right {
+     width: 33%;
+     float: left;
+     /*right: 20px;*/
+     height: 50px;
+     background-color: rgb(255, 255, 255);
+     overflow: hidden;
+ }
+ 
+ .div-registration, .div-login {
+     width: 50%;
+     float: left;
+     text-align: center;
+ }
+ 
+ .button-link, .button-menu {
+     margin-right: 5px;
+     cursor: pointer;
+     font-weight: bold;
+     width: 50%;
+     color: rgb(255, 255, 255);
+     background-color: rgb(0, 132, 137);
+ }
+ 
+ a {
+     text-align: center;
+     color: black;
+ }
+
+ .div-center {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+   
+    overflow: hidden;
+ }
+
+ .div-listOfRestaurants {
+    width: 70%;
+    float: left;
+    left: 20px;
+    min-width: 70%;
+    background-color: white;
+ }
+
+ .div-order {
+    width: 30%;
+    float: left;
+   /* left: 20px; */
+    min-width: 30%;
+    background-color: white;
+    height: fit-content;
+ }
+
+ .div-toOrder {
+    position: fixed;
+    right: 15px;
+    width: 22%;
+    
+    background-color: white;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(255, 90, 95);
+    padding: 5px;
+    height: fit-content;
+
+ }
+
+ body {
+    padding-top: 54px;
+  }
+  
+  @media (min-width: 992px) {
+    body {
+      padding-top: 56px;
+    }
+  }
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+  }
+  
+  .text-center {
+      text-align: center;
+  }
+
+  .restaurantname {
+      color: #007bff;
+  }
+
+  .btn btn-danger {
+    width: 120px;
+    height: 30px;
+    vertical-align: middle;
+  }
+
+ 
+
+  .img-icon {
+    width: 25px;  
+    padding: 5px;
+    margin: 5px;
+  }
+
+  .rest-description {
+    
+  }
+  
+  

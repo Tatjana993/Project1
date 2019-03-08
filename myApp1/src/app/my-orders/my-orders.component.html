@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+
+<body>
+    <ul>
+        <div class="success" *ngIf="showSucessMessage">
+            Order completed
+        </div>
+        <div class="success" *ngIf="tokenInvalid">
+            Token is invalid
+        </div>
+        <div>
+        <li *ngFor="let order of listOrders; index as i;">
+          <br>
+          
+          <div class="content">
+          <div class="restaurant-name"></div>  
+          <div id="{{i}}" class="order-description">{{order.get(i)}}</div>
+            <div class="div-form">
+            <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value, order)"> 
+             
+                <div class="form-group">
+                 
+                  <mat-form-field>
+                  <input matInput type="text" #address="ngModel" [(ngModel)]="ordero.address"  placeholder="Address" name="address" class="form-control" id="address"
+                  required [ngClass]="{'invalid-textbox' :f.submitted && !address.valid}">
+                </mat-form-field>
+                </div>
+                
+                <div class="example-button-row">
+                  <button class="btn btn-primary" mat-raised-button type="submit">Order Now</button>
+                </div>
+                
+              </form>
+            </div>
+            </div> 
+        </li>
+      </div>
+        </ul> 
+        <hr>
+</body>
+</html>  

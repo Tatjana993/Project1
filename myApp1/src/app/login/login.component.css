@@ -1,0 +1,20 @@
+CSS
+.container {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-button-row button {
+  margin-right: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 30%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 90, 95);
+}
