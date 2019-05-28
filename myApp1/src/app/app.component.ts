@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myApp1';
+  constructor() {
+    console.log(isDevMode());
+  }
 }
 
 

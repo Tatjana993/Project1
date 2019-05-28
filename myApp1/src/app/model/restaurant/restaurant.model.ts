@@ -6,4 +6,5 @@ export class Restaurant {
     email: string;
     description: string;
     image: string;
+    show = 'false';
 }

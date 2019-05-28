@@ -17,17 +17,18 @@ export class OfferlistService {
 
   public loadFromLocalstore() {
     this.removeAll();
-    if (localStorage.getItem('selectedOffer') !== null && localStorage.getItem('selectedOffer') !== ' ') {
+    /* if (localStorage.getItem('selectedOffer') !== null && localStorage.getItem('selectedOffer') !== ' ') {
       console.log(localStorage.getItem('selectedOffer'));
       if (localStorage.getItem('selectedOffer') === ' ') {
         console.log('odje smooooooooooooooooooooooooooooooooooooooooooooooo');
-      }
+      } */
+      if (sessionStorage.getItem('selectedOffer') !== null && sessionStorage.getItem('selectedOffer') !== ' ') {
+        if (sessionStorage.getItem('selectedOffer') === ' ') {
+        }
       this.fleg = true;
-      const selectedOffersToSplit = localStorage.getItem('selectedOffer').split(' ');
+     const selectedOffersToSplit = sessionStorage.getItem('selectedOffer').split(' ');
       let i = 0;
-      console.log(selectedOffersToSplit.length);
       for (i; i < selectedOffersToSplit.length - 1; i++) {
-        console.log(selectedOffersToSplit[i].split('#'));
         const idoffer = Number(selectedOffersToSplit[i].split('#')[0]);
         const iduser = Number(selectedOffersToSplit[i].split('#')[1]);
         const amount = Number(selectedOffersToSplit[i].split('#')[2]);
@@ -37,7 +38,6 @@ export class OfferlistService {
         for (let y = 0; y < sd.length - 1; y++) {
           sidedishes[y] = Number(sd[y]);
         }
-        console.log('parsiranoo ' + idoffer + 'amount ' + amount);
         const selectedoffer = new SelectedOffer(idoffer, iduser, amount, sidedishes, instruction);
         this.selectedOffersList.push(selectedoffer);
         this.restaurantService.getOfferById(idoffer)
@@ -45,8 +45,6 @@ export class OfferlistService {
           console.log(this.offer[0].name);  console.log('Array length ' + this.orderList.length); });
       }
       const tostring = this.orderList.toString();
-      console.log('************************** ');
-      console.log(tostring);
       }
       const toReturn = {'orderList': this.orderList, 'selectedOfferList': this.selectedOffersList};
       return toReturn;

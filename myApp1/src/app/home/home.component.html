@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
 </head>
 
 <body>
@@ -42,57 +42,21 @@
           </div>
         </div>
       </nav>
-     
-  <!--  <header class="header-home">
-      <div class="div-header-left">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/users_details/{{currentUserId}}">About</a>
-          </li>
-        </ul>
-      </div>
-      <div class="div-header-center">b</div>
-      <div class="div-header-right" *ngIf="currentUser; else loggedOut">
-        <div class="div-registration">
-            <button mat-button [matMenuTriggerFor]="menu" class="button-menu"><div *ngIf="currentUser">{{currentUser}}</div></button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="getUser()">Edit</button>
-                <button mat-menu-item>Item 2</button>
-              </mat-menu>
-        </div >
-        <div class="div-login">
-          <a mat-raised-button routerLink="login" class="button-link" (click)="logout()">Log out</a>
-        </div>
-      </div> 
-      <ng-template #loggedOut>
-      <div class="div-header-right">  
-        <div class="div-registration">
-         <a mat-raised-button routerLink="registration" class="button-link">Sign up</a>
-        </div>
-        <div class="div-login">
-          <a mat-raised-button routerLink="login" class="button-link">Log in</a>
-        </div>
-      </div>
-    </ng-template> 
-    </header>  -->
   <br>
   <br>
   <div class="div-center">
     <div class="div-listOfRestaurants">
       
       <ul [@listStagger]="restaurants">
-        <li *ngFor="let restaurant of restaurants">
+        <li *ngFor="let restaurant of restaurants"  (deferLoad)="restaurant.show = true">
           
             <div class="row">
               <div class="col-md-5">
                 <a routerLink='/offer/{{restaurant.idrestaurant}}'>
-                  <img class="img-fluid rounded mb-3 mb-md-0"  src="./../../assets/img/{{restaurant.image}}" width="120" height="120"  alt="Slika nije dostupna">
-                <!--   src="{{restaurant.image}}"  -->
+                  <ng-container *ngIf="restaurant.show">
+                  <img class="img-fluid rounded mb-3 mb-md-0"  src="{{restaurant.image}}" width="120" height="120"  alt="Slika nije dostupna">
+                </ng-container>
+                  <!--   src="{{restaurant.image}}"  -->
                 </a>
                 <div class="text-center">
                   <i class='far fa-address-card'></i> {{restaurant.address}}
@@ -109,8 +73,8 @@
               </div>
               <div class="col-md-5">
                 <a routerLink='/offer/{{restaurant.idrestaurant}}' class="restaurantname"><h3>{{restaurant.name}}</h3></a>
-                <p class="rest-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
-                <a class="btn btn-primary" href="#">Offers</a>
+                <p class="rest-description">{{restaurant.description}}</p>
+                <a class="btn btn-primary" routerLink='/offer/{{restaurant.idrestaurant}}'>Offers</a>
               </div>
             </div>
           
@@ -121,52 +85,6 @@
   <div class="div-order">
     <div class="div-toOrder">
       <app-sidebar></app-sidebar>
-     <!-- <h3><b>Shoping basket</b></h3>
-      <div *ngIf="orderList.lastIndexOf !== -1; else noOrderList">
-          
-        <ul>
-          <li *ngFor="let offer of selectedOffersList">
-            <ul>
-              <li>{{offer.amount}} x {{getName(offer.idoffer)}}</li>
-              <li>Price {{getOfferPrice(offer.idoffer)}} KM</li>
-              <li></li>
-              <li><button class="btn btn-danger" id="btn-remove" (click)="editSelectedOffer(offer)"><img class="img-icon" src="./remove.svg"></button> &nbsp;&nbsp;  
-              <button class="btn btn-danger" id="btn-add" (click)="addSelectedOffer(offer)"><img class="img-icon" src="./add.svg"></button></li>
-            </ul>
-          </li>
-        </ul> 
-      </div>
-      
-
-      <div>
-        <label><b>Total:&nbsp;</b></label>
-        <label>{{getTotalPrice()}} KM</label>
-      </div>
-      <div>
-      <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)"  *ngIf="fleg; else noOrderList">
-    
-        <div class="form-group">
-         
-          <mat-form-field>
-          <input matInput type="text" #address="ngModel" [(ngModel)]="order.address"  placeholder="Address" name="address" class="form-control" id="address"
-          required [ngClass]="{'invalid-textbox' :f.submitted && !address.valid}">
-        </mat-form-field>
-        </div>
-        
-        <div class="example-button-row">
-          <button class="btn btn-primary" mat-raised-button type="submit">Order Now</button>
-        </div>
-        
-      </form>
-    </div>
-      <ng-template #noOrderList>
-          <div>
-            List is Empty...
-          </div>
-        </ng-template>
-     <!-- <div class="" *ngIf="currentUser">
-          <button (click)="printSelected()">Order Now</button>
-          </div> -->
     </div>
   </div>
 </div>
@@ -175,8 +93,8 @@
 
 
   <!-- Bootstrap core JavaScript 
-  <script src="./../../../node_modules/jquery/dist/jquery.min.js"></script>  -->
-  <script src="./../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./../../../node_modules/jquery/dist/jquery.min.js"></script>  
+  <script src="./../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
 
 </body>
 

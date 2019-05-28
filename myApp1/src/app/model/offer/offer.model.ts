@@ -5,4 +5,5 @@ export class Offer {
     description: string;
     price: number;
     image: string;
+    show = 'false';
 }

@@ -18,7 +18,7 @@ export class UserCreateComponent implements OnInit {
   serverErrorMessages: string;
 
 
-  constructor(private apiService: ApiService) { }
+  constructor(public apiService: ApiService) { }
 
 
   ngOnInit() {

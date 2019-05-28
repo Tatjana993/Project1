@@ -3,10 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
 </head>
 
 <body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-custom">
+      <div class="container">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link " (click)="myhome()">Home
+              </a>
+            </li>
+            <ul class="navbar-nav ml-auto" *ngIf="currentUser; else loggedOut">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">My orders
+                    <span class="sr-only">(current)</span>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link cus-pointer" (click)="logout()">Log out</a>
+            </li>
+          </ul>
+            <ng-template #loggedOut>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="login">Log in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="registration">Sign up</a>
+              </li>
+          </ng-template>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <div class="my-orders">
     <ul>
         <div class="success" *ngIf="showSucessMessage">
             Order completed
@@ -43,5 +80,6 @@
       </div>
         </ul> 
         <hr>
+      </div>    
 </body>
 </html>  

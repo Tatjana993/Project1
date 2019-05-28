@@ -11,10 +11,10 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-users-details',
   templateUrl: './users-details.component.html',
-  styleUrls: ['./users-details.component.css',
-  './../../../node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.min.css',
-  './../../../node_modules/font-awesome/css/font-awesome.min.css',
-  './css/main.css']   // 'vendor/bootstrap/css/bootstrap.min.css'
+  styleUrls: ['./users-details.component.css']
+//  './../../../node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.min.css',
+//  './../../../node_modules/font-awesome/css/font-awesome.min.css',
+//  './css/main.css']   // 'vendor/bootstrap/css/bootstrap.min.css'
 })
 export class UsersDetailsComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class UsersDetailsComponent implements OnInit {
   user: User;
   editForm: FormGroup;
   serverMessages: String;
-  currentUser = localStorage.getItem('username');
+  currentUser = sessionStorage.getItem('username');
   submitted = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private formBuilder: FormBuilder,
@@ -33,13 +33,6 @@ export class UsersDetailsComponent implements OnInit {
   ngOnInit() {
     sessionStorage.setItem('sessionstorage', '1');
     localStorage.setItem('localstorage', '2');
-   /* this.editForm = new FormGroup({
-      first_name: new FormControl('', Validators.required),
-      last_name: new FormControl('', Validators.required),
-      username: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required)
-    }); */
     this.editForm = this.formBuilder.group({
       iduser: [],
       first_name: ['', Validators.required],
@@ -95,7 +88,11 @@ export class UsersDetailsComponent implements OnInit {
   }
 
   myorders() {
-    this.router.navigate(['users_details/' + localStorage.getItem('iduser') + '/myorders']);
+   // this.router.navigate(['users_details/' + localStorage.getItem('iduser') + '/myorders']);
+   this.router.navigate(['users_details/' + sessionStorage.getItem('iduser') + '/myorders']);
+  }
+  myhome() {
+    this.router.navigate(['']);
   }
 
 }

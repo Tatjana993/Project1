@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from './../restaurant.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Offer } from '../model/offer/offer.model';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
@@ -21,13 +21,14 @@ export class OfferComponent implements OnInit {
   filteredOffers: Array<Offer> = [];
   _searchTerm: string;
   lengthOfOffers = [];
-  address: string;
   amoutn: number;
   instructions: string;
   selectedsidedishes: Array<SideDish> = [];
   selectedOffers: Array<SelectedOffer> = [];
   restaurantName: string;
   nameimg: string;
+  currentUser = sessionStorage.getItem('iduser');
+  currentUserName = sessionStorage.getItem('username');
 
   get searchTerm(): string {
     return this._searchTerm;
@@ -49,7 +50,7 @@ export class OfferComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private restaurantService: RestaurantService, public dialog: MatDialog,
-   private home: HomeComponent, private offerlistservice: OfferlistService) {
+   private home: HomeComponent, private offerlistservice: OfferlistService, private router: Router) {
     this.route.params.subscribe( params => {this.id = params.id; });
   }
 
@@ -89,12 +90,19 @@ export class OfferComponent implements OnInit {
       for (let i = 0; i < sidedishIndex.length; i++) {
         sidedishIndexToString += sidedishIndex[i] + ',';
       }
-      const store = idoffer + '#' + Number(localStorage.getItem('iduser')) + '#' + Number(result['amount']) +
+   /*  const store = idoffer + '#' + Number(localStorage.getItem('iduser')) + '#' + Number(result['amount']) +
        '#' + sidedishIndexToString + '#' + result['instructions'] + ' ';
       if (localStorage.getItem('selectedOffer') !== null && localStorage.getItem('selectedOffer') !== ' ') {
         let temp = 0;
         let currentlyAtLocalStorage = localStorage.getItem('selectedOffer');
         const selectedOffers = localStorage.getItem('selectedOffer').split(' ');
+        let i = 0; */
+        const store = idoffer + '#' + Number(sessionStorage.getItem('iduser')) + '#' + Number(result['amount']) +
+       '#' + sidedishIndexToString + '#' + result['instructions'] + ' ';
+      if (sessionStorage.getItem('selectedOffer') !== null && sessionStorage.getItem('selectedOffer') !== ' ') {
+        let temp = 0;
+        let currentlyAtLocalStorage = sessionStorage.getItem('selectedOffer');
+        const selectedOffers = sessionStorage.getItem('selectedOffer').split(' ');
         let i = 0;
         // let editSelectedOffer = '';
 
@@ -105,41 +113,16 @@ export class OfferComponent implements OnInit {
              temp = 1;
            }
         }
-
-     /*   if (temp === 1) {
-        for (i = 0; i < selectedOffers.length - 1; i++) {
-        // console.log(selectedOffers[i].split('#'));
-         const idofferSelected = Number(selectedOffers[i].split('#')[0]);
-         if (idoffer === idofferSelected) {
-           const amountSelected = Number(result['amount']);
-           const iduser = Number(selectedOffers[i].split('#')[1]);
-           let amount = Number(selectedOffers[i].split('#')[2]);
-           if (amount + amountSelected <= 10) {
-             amount = amount + amountSelected;
-             editSelectedOffer += idoffer + '#' + iduser + '#' + amount + ' ';
-           } else {
-            editSelectedOffer += selectedOffers[i] + ' ';
-           }
-         } else {
-           editSelectedOffer += selectedOffers[i] + ' ';
-         }
-        }
-        localStorage.removeItem('selectedOffer');
-        localStorage.setItem('selectedOffer', editSelectedOffer);
-        } else { */
           console.log('44444444444444444444444444444444444');
           console.log(currentlyAtLocalStorage);
           console.log(store);
           currentlyAtLocalStorage += store;
-          localStorage.removeItem('selectedOffer');
-          localStorage.setItem('selectedOffer', currentlyAtLocalStorage);
+          sessionStorage.removeItem('selectedOffer');
+          sessionStorage.setItem('selectedOffer', currentlyAtLocalStorage);
       //  }
       } else {
-        localStorage.setItem('selectedOffer', store);
+        sessionStorage.setItem('selectedOffer', store);
       }
-     /* localStorage.setItem()
-     const selected = new SelectedOffer(idoffer, Number(localStorage.getItem('iduser')), Number(result['amount']));
-     this.selectedOffers.push(selected); */
      this.offerlistservice.loadFromLocalstore();
     }
   }
@@ -150,5 +133,8 @@ export class OfferComponent implements OnInit {
 
 logout() {
   this.home.logout();
+}
+myhome() {
+  this.router.navigate(['']);
 }
 }

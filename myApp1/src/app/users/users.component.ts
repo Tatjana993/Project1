@@ -17,7 +17,8 @@ import { MatMenuModule } from '@angular/material/menu';
 export class UsersComponent implements OnInit {
 
   users: Array<User> = [];
-  currentUser = localStorage.getItem('username');
+ // currentUser = localStorage.getItem('username');
+ currentUser = sessionStorage.getItem('username');
   constructor(private apiService: ApiService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {

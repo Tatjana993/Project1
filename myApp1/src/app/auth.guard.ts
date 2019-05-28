@@ -12,16 +12,16 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, public dialog: MatDialog) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (state.url === '/registration' && localStorage.getItem('access_token')) {
-      console.log(localStorage.getItem('access_token'));
-      this.router.navigate(['']);
-      return false;
-    } else if (state.url === '/registration' && localStorage.getItem('access_token') === null) {
-      return true;
-    } else {
-        if (localStorage.getItem('access_token')) {
+        if (state.url === '/registration' && sessionStorage.getItem('access_token')) {
+          console.log(sessionStorage.getItem('access_token'));
+          this.router.navigate(['']);
+          return false;
+        } else if (state.url === '/registration' && sessionStorage.getItem('access_token') === null) {
           return true;
-        }
+        } else {
+            if (sessionStorage.getItem('access_token')) {
+              return true;
+            }
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.width = '400px';
@@ -33,7 +33,8 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivateCustom(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (localStorage.getItem('access_token')) {
+   // if (localStorage.getItem('access_token')) {
+    if (sessionStorage.getItem('access_token')) {
       this.router.navigate(['']);
       return false;
     }

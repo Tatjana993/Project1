@@ -6,11 +6,8 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UsersComponent } from './users/users.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UsersDetailsComponent } from './users-details/users-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
-import { UserCreateComponent } from './user-create/user-create.component';
-import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -21,47 +18,20 @@ import { FormFileExampleComponent } from './form-file-example/form-file-example.
 import { HomeComponent } from './home/home.component';
 import { OfferComponent } from './offer/offer.component';
 import {MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonToggleModule,
-  MatCardModule,
+  MatSelectModule,
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatListModule,
   MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatTreeModule,
 } from '@angular/material';
 import { OrderDialogComponent } from './order-dialog/order-dialog.component';
 import { RedirectToLoginDialogComponentComponent } from './redirect-to-login-dialog-component/redirect-to-login-dialog-component.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { FirstComponent } from './first/first.component';
+
 
 
 export function tokenGetter() {
-  return localStorage.getItem('access_token');
+return sessionStorage.getItem('access_token');
 }
 
 @NgModule({
@@ -69,16 +39,11 @@ export function tokenGetter() {
     AppComponent,
     SidebarComponent,
     UsersComponent,
-    UsersDetailsComponent,
-    LoginComponent,
-    UserCreateComponent,
-    RestaurantsComponent,
     FormFileExampleComponent,
     HomeComponent,
     OfferComponent,
     OrderDialogComponent,
     RedirectToLoginDialogComponentComponent,
-    MyOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +59,7 @@ export function tokenGetter() {
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
+    DeferLoadModule,
      // Auth ...
      JwtModule.forRoot({
       config: {
@@ -104,41 +70,6 @@ export function tokenGetter() {
     })
   ],
   exports: [
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
   ],
   providers: [
     AuthService,

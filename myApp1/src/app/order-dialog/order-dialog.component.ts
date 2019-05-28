@@ -17,7 +17,6 @@ export class OrderDialogComponent implements OnInit {
   amount: number;
   instructions: string;
   checkbox = false;
-  indeterminate = false;
   sidedishes: Array<SideDish> = [];
   selectedsidedishes: Array<SideDish> = [];
   sidedishIndex = [];
@@ -40,11 +39,6 @@ export class OrderDialogComponent implements OnInit {
       this.index[i] = i;
       this.controlNameSD[i] = this.sidedishes[i].name;
     }
-   /* const controls = this.sidedishes.map(c => new FormControl(false));
-    controls[0].setValue(true); // Set the first checkbox to true (checked)
-    this.form = this.formBuilder.group({
-      sidedishes: new FormArray(controls)
-    }); */
     });
 
     this.restaurantService.getOfferById(Number(this.data['idoffer'])).subscribe((data: Offer) => {this.selectedOffer = data[0];

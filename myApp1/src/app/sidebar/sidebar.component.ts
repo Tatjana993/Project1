@@ -19,9 +19,6 @@ export class SidebarComponent implements OnInit {
   showSucessMessage: boolean;
   tokenInvalid: boolean;
   oderForm: FormGroup;
-  submitted: boolean;
-  invalidLogin: boolean;
-  serverMessages: String;
   order: Order = {
     idorder: 0,
     address: ''
@@ -53,11 +50,12 @@ export class SidebarComponent implements OnInit {
   }
 
   editSelectedOffer(offer: Offer) {
-    const selectedOffers = localStorage.getItem('selectedOffer').split(' ');
+  //  const selectedOffers = localStorage.getItem('selectedOffer').split(' ');
+  const selectedOffers = sessionStorage.getItem('selectedOffer').split(' ');
     let editSelectedOffer = '';
    // let editedOffer = '';
    console.log('***********************************');
-   console.log(localStorage.getItem('selectedOffer'));
+   console.log(sessionStorage.getItem('selectedOffer'));
     let i = 0;
     for (i; i < selectedOffers.length - 1; i++) {
     // console.log(selectedOffers[i].split('#'));
@@ -75,11 +73,10 @@ export class SidebarComponent implements OnInit {
        editSelectedOffer += selectedOffers[i] + ' ';
      }
     }
-   // editSelectedOffer += ' ';
-    localStorage.removeItem('selectedOffer');
-    localStorage.setItem('selectedOffer', editSelectedOffer);
+   sessionStorage.removeItem('selectedOffer');
+   sessionStorage.setItem('selectedOffer', editSelectedOffer);
     console.log('***********************************');
-   console.log(localStorage.getItem('selectedOffer'));
+   console.log(sessionStorage.getItem('selectedOffer'));
     console.log('44444 ' + this.selectedOffersList);
    for (i = 0; i < this.selectedOffersList.length; i++) {
      if (this.selectedOffersList[i].idoffer === offer.idoffer) {
@@ -99,11 +96,12 @@ export class SidebarComponent implements OnInit {
    }
   }
   addSelectedOffer(offer: Offer) {
-   const selectedOffers = localStorage.getItem('selectedOffer').split(' ');
+   // const selectedOffers = localStorage.getItem('selectedOffer').split(' ');
+   const selectedOffers = sessionStorage.getItem('selectedOffer').split(' ');
    let editSelectedOffer = '';
   // let editedOffer = '';
   console.log('***********************************');
-  console.log(localStorage.getItem('selectedOffer'));
+  console.log(sessionStorage.getItem('selectedOffer'));
    let i = 0;
    for (i; i < selectedOffers.length - 1; i++) {
    // console.log(selectedOffers[i].split('#'));
@@ -123,11 +121,10 @@ export class SidebarComponent implements OnInit {
       editSelectedOffer += selectedOffers[i] + ' ';
     }
    }
-  // editSelectedOffer += ' ';
-   localStorage.removeItem('selectedOffer');
-   localStorage.setItem('selectedOffer', editSelectedOffer);
-   console.log('***********************************');
-  console.log(localStorage.getItem('selectedOffer'));
+  sessionStorage.removeItem('selectedOffer');
+  sessionStorage.setItem('selectedOffer', editSelectedOffer);
+  console.log('***********************************');
+ console.log(sessionStorage.getItem('selectedOffer'));
 
   console.log('44444 ' + this.selectedOffersList);
   for (i = 0; i < this.selectedOffersList.length; i++) {
@@ -145,11 +142,13 @@ export class SidebarComponent implements OnInit {
   onSubmit(form: NgForm) {
 
     console.log('on Submit() ' + this.order.address);
-    if (localStorage.getItem('selectedOffer') !== null) {
+  //  if (localStorage.getItem('selectedOffer') !== null) {
+    if (sessionStorage.getItem('selectedOffer') !== null) {
         console.log(this.selectedOffersList);
       const toOrder = {selectedOfferList: this.selectedOffersList, address: this.order.address};
       console.log(toOrder);
-      localStorage.removeItem('selectedOffer');
+     // localStorage.removeItem('selectedOffer');
+     sessionStorage.removeItem('selectedOffer');
       this.restaurantService.createOrder(toOrder)
       .subscribe((data: JSON) => { console.log(data);
       if (data['status'] === 'ok') {

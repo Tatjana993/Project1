@@ -17,13 +17,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:4200/">Home
+                <a class="nav-link cus-pointer" (click)="myhome()">Home
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
               <ul class="navbar-nav ml-auto">
               <li class="nav-item" >
-                <a class="nav-link" routerLink="/users_details/{{currentUserId}}">My Account({{currentUser}})</a>
+                <a class="nav-link" routerLink="/users_details/{{currentUser}}">My Account({{currentUserName}})</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" routerLink="login" (click)="logout()">Log out</a>
@@ -38,14 +38,18 @@
    <!-- Page Content -->
    <div class="container">
       <div class="div-center"> 
-     
+        
        <div class="div-offer">
-         <div>
-           <input type="text" placeholder="Search" style="width: 300px" [(ngModel)]="searchTerm">
+         <div class="div-search">
+            <mat-form-field>
+                <input matInput type="text" placeholder="Search" style="width: 300px" #search="ngModel" [(ngModel)]="searchTerm" class="form-control">
+               </mat-form-field>
          </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item offer-h400" *ngFor="let offer of filteredOffers; let i = index;">
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item offer-h400" *ngFor="let offer of filteredOffers; let i = index;" (deferLoad)="offer.show = true">
           <div class="card h-100 offer-w220">
+              <ng-container *ngIf="offer.show">
             <a (click)="openDialog(offer.idoffer)"><img class="card-img-top" src="./../../assets/img/{{offer.image}}" alt=""></a>
+              </ng-container>
             <div class="card-body">
               <h4 class="card-title">
                 <a class="nav-link" style="color: #007bff;" (click)="openDialog(offer.idoffer)">{{offer.name}} </a>
@@ -66,21 +70,6 @@
       </div>  
       </div>
       
- <!-- <div>
-  
-  <ul>
-    <li *ngFor="let offer of offers">
-       
-      <ul>
-        <li>{{offer.name}}</li>
-        <li>{{offer.description}}</li>
-        <li>{{offer.idrestaurant}}</li>
-        <li><a mat-raised-button (click)="openDialog(offer.idoffer)" class="button-link">Naruci</a></li>
-      </ul>
-    </li>
-  </ul>
-  <button (click)="openDialog()">dialog</button>
-</div> -->
 </body>
 
 </html>

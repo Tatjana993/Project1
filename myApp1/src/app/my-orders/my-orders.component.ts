@@ -5,6 +5,8 @@ import { ArraySelectedOffers } from '../model/selectedofferjoinoffer/ArraySelect
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Order } from '../model/order/order.model';
 import { SelectedOffer } from '../model/selectedOffer/selectedoffer.model';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-orders',
@@ -14,20 +16,18 @@ import { SelectedOffer } from '../model/selectedOffer/selectedoffer.model';
 export class MyOrdersComponent implements OnInit {
 
   a: Array<Array<JSON>>;
-  arrayIdOrder: Number[] ;
   listOrders: Array<ArraySelectedOffers> = new Array<ArraySelectedOffers>();
   selectedOffersList: Array<SelectedOffer> = [];
   showSucessMessage: boolean;
   tokenInvalid: boolean;
   oderForm: FormGroup;
-  submitted: boolean;
-  invalidLogin: boolean;
-  serverMessages: String;
+  currentUser = sessionStorage.getItem('username');
   ordero: Order = {
     idorder: 0,
     address: ''
   };
-  constructor(private restaurantService: RestaurantService, private formBuilder: FormBuilder) { }
+  constructor(private restaurantService: RestaurantService, private formBuilder: FormBuilder,
+    private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
 
@@ -35,7 +35,8 @@ export class MyOrdersComponent implements OnInit {
       address: ['', Validators.required]
     });
 
-     this.restaurantService.getOffersWhereUserId(Number(localStorage.getItem('iduser'))).subscribe
+     // this.restaurantService.getOffersWhereUserId(Number(localStorage.getItem('iduser'))).subscribe
+     this.restaurantService.getOffersWhereUserId(Number(sessionStorage.getItem('iduser'))).subscribe
      ((data: Array<Array<JSON>>) => { this.a = data;
        console.log(this.a);
        for (let i = 0; i < this.a.length; i++) {
@@ -48,29 +49,6 @@ export class MyOrdersComponent implements OnInit {
         }
         this.listOrders.push(arrayselectedoffer);
        }
-
-     /* for (let i = 0; i < this.a.length; i++) {
-        // console.log(String(this.a[i]));
-        const arrayselectedoffer = new ArraySelectedOffers();
-        const strsplit = String(this.a[i]).split(',');
-        for (let y = 0; y < strsplit.length; y++) {
-          this.restaurantService.getRestaurant(Number(strsplit[y].split(':')[7])).subscribe
-           ((rname: JSON) => {
-        //  this.getRestaurant(Number(strsplit[y].split(':')[7]), function(rname) {
-           // console.log(rname);
-           this.restaurantService.getSelectedSidedishes(Number(strsplit[y].split(':')[0])).subscribe
-           ((selectedSidedishes: Array<String>) => {
-              console.log(selectedSidedishes);
-            const description = strsplit[y].split(':')[3].replace(/; /g, ', ');
-            const selectedOffer = new SelectedofferJoinOffer(Number(strsplit[y].split(':')[0]), strsplit[y].split(':')[1],
-             Number(strsplit[y].split(':')[2]), description, Number(strsplit[y].split(':')[4]), strsplit[y].split(':')[5],
-               Number(strsplit[y].split(':')[6]), rname[0].name, selectedSidedishes);
-             arrayselectedoffer.add(selectedOffer);
-           });
-          });
-        }
-        this.listOrders.push(arrayselectedoffer);
-      } */
      });
   }
 
@@ -81,8 +59,9 @@ export class MyOrdersComponent implements OnInit {
       if (toorder.array[i].instruction === undefined || toorder.array[i].instruction === null) {
         toorder.array[i].instruction = 'null';
       }
-      const sel = new SelectedOffer(toorder.array[i].idOffer, Number(localStorage.getItem('iduser')),
-       toorder.array[i].amount, [1], toorder.array[i].instruction);
+     // const sel = new SelectedOffer(toorder.array[i].idOffer, Number(localStorage.getItem('iduser')),
+     const sel = new SelectedOffer(toorder.array[i].idOffer, Number(sessionStorage.getItem('iduser')),
+     toorder.array[i].amount, [1], toorder.array[i].instruction);
        this.selectedOffersList.push(sel);
     }
       const toOrder = {selectedOfferList: this.selectedOffersList, address: this.ordero.address};
@@ -114,5 +93,18 @@ export class MyOrdersComponent implements OnInit {
    this.restaurantService.getRestaurant(idrestaurant).subscribe
    ((data: JSON) => { cb(data[0].name);  });
  }
+
+ logout() {
+  this.auth.logout();
+  this.router.navigate(['login']);
+}
+
+myorders() {
+ // this.router.navigate(['users_details/' + localStorage.getItem('iduser') + '/myorders']);
+ this.router.navigate(['users_details/' + sessionStorage.getItem('iduser') + '/myorders']);
+}
+myhome() {
+  this.router.navigate(['']);
+}
 
 }

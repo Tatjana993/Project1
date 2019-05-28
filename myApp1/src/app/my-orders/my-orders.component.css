@@ -9,6 +9,10 @@
     font-weight: bold;
 }
 
+.my-orders {
+    margin-top: 15px;
+}
+
 .content {
     width: 100%;
     overflow: hidden;
