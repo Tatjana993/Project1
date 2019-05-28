@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button large (click)="back()">
+              <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="success" *ngIf="showSucessMessage">
+        Order completed
+    </div>
+    <div class="unsuccessful" *ngIf="tokenInvalid">
+        Token is invalid
+    </div>
+    <div *ngIf="orderList.lastIndexOf !== -1; else noOrderList" class="content-div">
+      
+            <ion-list *ngFor="let offer of selectedOffersList">
+              <div class="offer-item">
+              <div>{{offer.amount}} x {{getName(offer.idoffer)}}</div>
+              <div>Price {{getOfferPrice(offer.idoffer)}} KM</div>
+              <div>
+              <ion-button class="button button-stable button-clear icon ion-plus"  (click)="addSelectedOffer(offer)"><ion-img class="img-icon" src="./../../assets/add.svg"></ion-img></ion-button>
+              <ion-button class="button button-stable button-clear icon ion-minus" (click)="editSelectedOffer(offer)"><ion-img class="img-icon" src="./../../assets/remove.svg"></ion-img></ion-button> &nbsp;&nbsp;  
+              </div>
+             </div>
+        </ion-list>  
+         <div>
+          <div><b>Total:&nbsp;</b></div>
+          <div>{{getTotalPrice()}} KM</div>
+        </div>
+       <div>
+          <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)" *ngIf="selectedOffersList.length > 0; else noOrderList">
+           
+            <ion-input type="text" #address="ngModel" [(ngModel)]="order.address"  placeholder="Address" name="address" class="form-control" id="address"
+            required [ngClass]="{'invalid-textbox' :f.submitted && !address.valid}">
+            </ion-input>
+          
+            
+            <ion-button type="ngSubmit">Order Now</ion-button>
+         
+          </form>
+        </div>
+     
+      </div>
+      <ng-template #noOrderList>
+          <div>
+            List is Empty...
+          </div>
+        </ng-template>
+</ion-content>

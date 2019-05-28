@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      
+    </ion-title>
+  </ion-toolbar>
+ <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div text-center>
+          <h4>Login Form</h4>
+        </div>
+        <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f.value)">
+        <div padding>
+          <ion-item>
+            <ion-input type="text" placeholder="Username" #username="ngModel" [(ngModel)]="user.username" name="username"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-input type="password" placeholder="Password" #password="ngModel" [(ngModel)]="user.password" name="password"></ion-input>
+          </ion-item>
+        </div>
+  
+        <div padding>
+          <ion-button size="large" expand="block" type="submit">Login</ion-button>
+        </div>
+      </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+      
+  </ion-content>
+
+   <!-- Bootstrap core JavaScript -->
+ <!-- <script src="./../../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->

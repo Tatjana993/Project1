@@ -1,0 +1,72 @@
+<ion-header>
+<ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button large (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  <ion-buttons slot="secondary" class="btt-left">
+      <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>    
+      <ion-button (click)="presentMyBasket()">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>   
+
+  
+  <!--  <ion-tab-bar slot="primary">
+ 
+    <ion-button (click)="back()" class="button-tab">
+      <ion-icon name="arrow-back"></ion-icon>
+  </ion-button>
+  
+    <ion-button (click)="logout()">
+      <ion-icon slot="icon-only" name="log-out"></ion-icon>
+    </ion-button>
+
+    <ion-button (click)="presentMyBasket()" class="button-tab-right">
+      <ion-icon slot="icon-only" name="cart"></ion-icon>
+    </ion-button>
+
+  </ion-tab-bar>  -->
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngFor="let restaurant of restaurants" (deferLoad)="restaurant.show = true">
+    <ion-item>
+      <div class="row">
+         <div class="col-md-5">
+    <!--  <a>{{restaurant.name}}</a>  --> 
+      <div class="div-img">
+         
+      <ion-img class="rest-image" src="{{restaurant.image}}" alt="Slika nije dostupna"></ion-img>
+         
+    </div>
+      <div class="div-info">
+      <div class="text-center">
+          <i class='far fa-address-card'></i> {{restaurant.address}}
+        </div>
+        <div class="text-center">  
+            <i class='fas fa-phone'></i> {{restaurant.phone}}
+        </div>
+        <div class="text-center">  
+         <i class="far fa-clock"></i> 55 minutes. Delivery until 22:45 
+        </div>
+        <div class="text-center">  
+            <i class="fa fa-car"></i> Free delivery
+        </div> 
+      </div>   
+    </div>
+    <div class="col-md-5">
+        <a routerLink='/offers/{{restaurant.idrestaurant}}' class="restaurantname"><h3>{{restaurant.name}}</h3></a>
+        <p class="rest-description">{{restaurant.description}}</p>
+        <a class="btn btn-primary" routerLink='/offers/{{restaurant.idrestaurant}}'>Offers</a>
+      </div>
+  </div> 
+    </ion-item>
+  </ion-list>
+</ion-content>

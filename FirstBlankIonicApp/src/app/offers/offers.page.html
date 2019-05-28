@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button large (click)="back()">
+              <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      <ion-buttons slot="secondary" class="btt-left">
+          <ion-button (click)="redirectToHome()">
+              <ion-icon slot="icon-only" name="home"></ion-icon>
+          </ion-button>    
+          <ion-button (click)="presentMyBasket()">
+            <ion-icon slot="icon-only" name="cart"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        
+     <!-- <ion-button shape="block" color="primary" (click)="presentMyBasket()">My Basket</ion-button>  -->
+  </ion-toolbar>
+      
+</ion-header>
+
+<ion-content padding>
+  
+  <div class="div-offer">
+    <div>
+    <!-- Default Searchbar -->
+    <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
+    </div>
+    <ion-list *ngFor="let offer of filteredOffers; let i = index;">
+   <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item offer-h400">
+     <div class="card h-100 offer-w220">
+       <a (click)="presentModal(offer.idoffer)"><img class="card-img-top" src="./../../assets/img/{{offer.image}}" alt=""></a>
+       <div class="card-body">
+         <h4 class="card-title">
+           <a class="nav-link" style="color: #007bff;" (click)="presentModal(offer.idoffer)">{{offer.name}} </a>
+           <!--{{i}}-->
+         </h4>
+         <p class="card-text">
+           <span>{{offer.description}}</span><br>
+           <span><b>{{offer.price}}  KM</b></span>
+         </p>
+       </div>
+     </div>
+   </div>
+  </ion-list>
+  </div>
+ 
+  </ion-content>

@@ -1,0 +1,35 @@
+.rest-image {
+    max-width: 65px;
+    max-height: 65px;
+    align-content: center;
+    border: 1px solid black;
+}
+
+body {
+    font-size: 2px;
+}
+
+.div-img {
+    float: left;
+}
+
+.div-info {
+    float: right;
+    font-size: 11px;
+    align-content: center;
+    
+}
+.button-tab {
+   margin-right: 80px;
+}
+.button-tab-right {
+  margin-left: 15px;
+}
+
+.btt-left {
+    margin-left: 165px;
+}
+
+text-center {
+    align-content: flex-end;    
+}
