@@ -27,7 +27,7 @@
     "@trademe/ng-defer-load": "^3.0.0",
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "ng2-lazyload-image": "^2.4.0",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",
